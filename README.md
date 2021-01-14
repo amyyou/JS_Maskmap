@@ -10,15 +10,15 @@
 
 
 ## 地圖應用(原理 底層)框架
-Google Map 、OSM、mapbox
+Google Map 、OSM、mapbox         
 
 ## Leaflet (js框架 -常見處理)
-圖資(地圖資料)
-標示點(marker)
+圖資(地圖資料)       
+標示點(marker)     
 
 ## OpenStreetMap(圖資、圖磚 - 地圖資料)
-Google Map (收費)
-Safari Map 
-OpenSteetMap(開源免費)
+Google Map (收費)      
+Safari Map      
+OpenSteetMap(開源免費)     
 
 ## Geolocation api 抓自己座標

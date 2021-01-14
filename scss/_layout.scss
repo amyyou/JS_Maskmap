@@ -1,0 +1,350 @@
+@mixin pad-horiz{
+    @media(max-width:1024px){
+      @content;
+    }
+  }
+@mixin pad{
+    @media(max-width:768px){
+      @content;
+    }
+  }
+@mixin mobile{
+    @media(max-width:375px){
+      @content;
+    }
+  }
+
+
+
+html,body{
+    font-family: 'Roboto', sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+}
+
+.btn-toggle{
+    cursor: pointer;
+    position: absolute;
+    left: 330px;
+    top: 50%;
+    z-index: 999;
+    font-size: 50px;
+    color: #d65600;
+    transform: translateY(-50%);
+    //transition: left 1s, transition 1s;
+    transition: all 1s;
+
+    //btn toggle
+    &.hide{
+        transform:translateY(-50%) translateX(-330px) rotate(180deg);
+        transition: all 1.5s;
+    }
+
+    &:hover{
+        animation: icon-moving-hide 1.5s infinite;
+    }
+
+    @keyframes icon-moving-hide {
+        0%{
+            left: 350px;
+        }
+        50%{
+            left: 343px;
+        }
+        100%{
+            left: 350px;
+        }
+    }
+
+    @include pad-horiz{
+        left: 250px;
+        @keyframes icon-moving-hide {
+            0%{
+                left: 250px;
+            }
+            50%{
+                left: 243px;
+            }
+            100%{
+                left: 250px;
+            }
+        }
+        &.hide{
+            transform:translateY(-50%) translateX(-250px) rotate(180deg);
+            transition: all 1.5s;
+        }
+    }
+
+}
+
+.sidebar{
+    overflow-y: scroll;
+    max-width: 330px;
+    width: 330px;
+    background-color: #fff;
+    font-family: Roboto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    transition: all 1s;
+
+
+    //sidebar toggle
+    &.hide{
+        transform: translateX(-100%);
+        transition: all 1s;
+    }
+
+    @include pad-horiz{
+        width: 250px;
+    }
+
+    .info{
+        background-image: url(../img/img_bg_orange.svg);
+        padding:20px 20px;
+        color:#fff;
+      
+        .odd , .even , .other{
+            display: none;
+            font-size: 14px;
+            background-color: #fcc56d;
+            color: #000;
+            padding: 3px 0px;
+            span{
+                color: #c80000;
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+        }
+
+        h3{
+            font-size: 14px;
+            text-shadow: 0px 3px 6px #00000029;
+            margin-bottom: 10px;
+
+        }
+
+        h2{
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 0px 3px 6px #00000029;
+            margin-bottom: 10px;
+
+        }
+
+        p {
+            font-size: 14px;
+            text-shadow: 0px 3px 6px #00000029;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+    
+
+    }
+
+    .searchbar{
+        padding: 16px 20px;
+
+        .selectBox{
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            select{
+                width: 45%;
+                font-size: 16px;
+                padding:5px 2px;
+            }
+
+            @include pad-horiz{
+                flex-direction: column;
+                select{
+                    width: 100%;
+                    margin-bottom: 8px;
+                }
+            }
+        }
+
+        .maskGroup{
+            display: flex;
+            justify-content: space-around;
+
+            .btn{
+                cursor: pointer;
+                border-radius: 10px;
+                border:none;
+                font-size: 16px;
+                padding:10px 10px;
+                background: rgba(255, 255, 255, 1) 0% 0% no-repeat padding-box;
+                border: 1px solid rgba(234, 234, 234, 1);
+                color: rgba(204, 204, 204, 1);
+            }
+
+            .btn.active{
+                background: rgba(214, 86, 0, 1) 0% 0% no-repeat padding-box;
+                color: rgba(255, 255, 255, 1);
+
+            }
+
+
+            @include pad-horiz{
+                flex-direction: column;
+                .btn{
+                    width: 100%;
+                    margin-bottom: 8px;
+                }
+            }
+        }
+    }
+
+    .list{
+        li{
+            border-top: 1px solid rgba(102, 102, 102, 0.2);
+            padding: 10px 20px;
+            
+
+            h2{
+                color: rgba(51, 51, 51, 1);
+                font-weight: bold;
+                font-size: 16px;
+                cursor: pointer;
+                &:hover {
+                color:#d65600;
+            }
+
+            }
+        }
+    }
+    
+}
+
+
+
+// ============================= JS Class =======================================
+
+//JS 地圖彈跳窗口
+.popupBox{
+    h2 {
+        color: rgba(51, 51, 51, 1);
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 0.5;
+    }
+    p {
+        font-size: 14px;
+        color: rgba(102, 102, 102, 1);
+        line-height: 0.5;
+
+    }
+
+
+    .maskBox{
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+
+        
+      .btn{
+        width: 38%;
+        border-radius: 8px;
+        padding: 10px 10px;
+        font-size: 14px;
+        margin-right: 5px;
+       }
+
+        .btn_adult{
+            background: rgba(255, 151, 59, 0.2) 0% 0% no-repeat padding-box;
+            color: rgba(255, 151, 59, 1);
+            border: none;
+        }
+        .btn_child{
+            background: rgba(255, 219, 77, 0.2) 0% 0% no-repeat padding-box;
+            color: rgba(248, 190, 0, 1);
+            border: none;
+        }
+
+        @include pad-horiz{
+            flex-direction: column;
+            .btn{
+                width: 93%;
+                margin-bottom: 8px;
+            }
+        }
+
+    }
+
+    .btn_google{
+        cursor: pointer;
+        text-decoration: none;
+        width: 93%;
+        border-radius: 8px;
+        padding: 10px 10px;
+        text-align: center;
+        color: #fff;
+        background: rgba(104, 175, 135, 1) 0% 0% no-repeat padding-box;
+        display: block;
+        margin-top: 10px;
+
+    }
+}
+
+.listItem{
+    h2 {
+        color: rgba(51, 51, 51, 1);
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 2;
+    }
+    p {
+        font-size: 14px;
+        color: rgba(102, 102, 102, 1);
+        line-height: 2;
+    }
+
+    .maskBox{
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        margin:8px 0;
+        .btn{
+            width: 45%;
+            border-radius: 15px;
+            padding: 10px 10px;
+            font-size: 14px;
+            margin-right: 5px;
+           }
+        .btn_adult{
+            background: rgba(255, 151, 59, 0.2) 0% 0% no-repeat padding-box;
+            color: rgba(255, 151, 59, 1);
+            border: none;
+        }
+        .btn_child{
+            background: rgba(255, 219, 77, 0.2) 0% 0% no-repeat padding-box;
+            color: rgba(248, 190, 0, 1);
+            border: none;
+        }
+
+        .btn_noMask{
+            background: rgba(249, 249, 249, 1) 0% 0% no-repeat padding-box;
+            color: rgba(204, 204, 204, 1);
+            border: none;
+        }
+
+        @include pad-horiz{
+            flex-direction: column;
+            .btn{
+                width: 93%;
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    
+}
